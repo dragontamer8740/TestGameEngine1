@@ -21,3 +21,6 @@ If you want to help out, send a pull request. If you want something added, feel
 free to report an issue, but don't expect me to get to it any time soon. I have
 a lot more to add and a lot more to think about just to get this project truly
 off the ground.
+
+This is a start, however. I hope people can help make this great some day.
+Don't be shy to ask for things or try unusual things with this.
