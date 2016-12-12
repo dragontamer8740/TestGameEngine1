@@ -12,12 +12,37 @@ public:
     /*void newGame(QTextBrowser *textField);*/
     void newGame();
     void setupGameUI(QTextBrowser *textField,QPushButton buttons[]);
+    void setupButtons();
     /*void setupGameButtons(QButtonGroup *btnGroup);*/
     const std::string gameNameShort="textGame1";
+
+    void btnPress(int btnNum);
+
+    void (GameClass::*btn0)()=NULL;
+    void (GameClass::*btn1)()=NULL;
+    void (GameClass::*btn2)()=NULL;
+    void (GameClass::*btn3)()=NULL;
+    void (GameClass::*btn4)()=NULL;
+    void (GameClass::*btn5)()=NULL;
+    void (GameClass::*btn6)()=NULL;
+    void (GameClass::*btn7)()=NULL;
+    void (GameClass::*btn8)()=NULL;
+    void (GameClass::*btn9)()=NULL;
+    void (GameClass::*btn10)()=NULL;
+    void (GameClass::*btn11)()=NULL;
+    void (GameClass::*btn12)()=NULL;
+    void (GameClass::*btn13)()=NULL;
+    void (GameClass::*btn14)()=NULL;
+    void doNothing();
+
 private:
     void disp(QString str);
     void append(QString str);
 
+    void checkMail();
+    void takeLetter();
 };
+
+
 
 #endif // GAMECLASS_H

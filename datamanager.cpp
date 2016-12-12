@@ -19,11 +19,14 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 
+
+/* directory to use for save data */
 QDir dir;
 
-
+/* save slot number */
 int slotNumber; /* set with setSaveSlot(), retrieved with getSaveSlot(). */
 
+/* instantiated in main.cpp, which we don't usually have access to. */
 extern GameClass gameClass;
 
 DataManager::DataManager()

@@ -118,8 +118,8 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QLabel" name="label">
+        <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+         <widget class="QLabel" name="gfx">
           <property name="font">
            <font>
             <family>DejaVu Sans</family>
@@ -129,7 +129,7 @@
            <string/>
           </property>
           <property name="pixmap">
-           <pixmap>./zork1.png</pixmap>
+           <pixmap>zork1.png</pixmap>
           </property>
           <property name="alignment">
            <set>Qt::AlignHCenter|Qt::AlignTop</set>
@@ -336,7 +336,9 @@
          <widget class="QTextBrowser" name="textField">
           <property name="font">
            <font>
-            <family>DejaVu Sans</family>
+            <family>Serif</family>
+            <pointsize>9</pointsize>
+            <stylestrategy>PreferDefault</stylestrategy>
            </font>
           </property>
           <property name="focusPolicy">
