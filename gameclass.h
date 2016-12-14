@@ -5,6 +5,8 @@
 #include "ui_mainwindow.h"
 #include <string>
 
+
+
 class GameClass
 {
 public:
@@ -17,6 +19,13 @@ public:
     const std::string gameNameShort="textGame1";
 
     void btnPress(int btnNum);
+    void addButton(int button, QString str, void *func);
+    void clearButton(int button);
+    void clearAllButtons();
+
+    /* hopefully this simplifies stuff */
+    /*void (GameClass::*btnPtr[15])();*/
+
 
     void (GameClass::*btn0)()=NULL;
     void (GameClass::*btn1)()=NULL;

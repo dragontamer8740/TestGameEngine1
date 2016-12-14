@@ -16,6 +16,23 @@ QPushButton *btn; /* we know we have 15 buttons */
  * If anyone wants to make this less horrible, I'm open to fixes.
  * these are function pointers that can be reassigned at will to make the buttons
  * do different things in different circumstances. */
+/*
+ * void (GameClass::*btn0)();
+void (GameClass::*btn1)();
+void (GameClass::*btn2)();
+void (GameClass::*btn3)();
+void (GameClass::*btn4)();
+void (GameClass::*btn5)();
+void (GameClass::*btn6)();
+void (GameClass::*btn7)();
+void (GameClass::*btn8)();
+void (GameClass::*btn9)();
+void (GameClass::*btn10)();
+void (GameClass::*btn11)();
+void (GameClass::*btn12)();
+void (GameClass::*btn13)();
+void (GameClass::*btn14)();*/
+/*void (*btn0)();*/
 void (GameClass::*btn0)();
 void (GameClass::*btn1)();
 void (GameClass::*btn2)();
@@ -33,25 +50,51 @@ void (GameClass::*btn13)();
 void (GameClass::*btn14)();
 /* set these to point to doNothing() until made to point otherwise */
 
-void GameClass::setupButtons(){
-    btn0=&GameClass::doNothing;
-    btn1=&GameClass::doNothing;
-    btn2=&GameClass::doNothing;
-    btn3=&GameClass::doNothing;
-    btn4=&GameClass::doNothing;
-    btn5=&GameClass::doNothing;
-    btn6=&GameClass::doNothing;
-    btn7=&GameClass::doNothing;
-    btn8=&GameClass::doNothing;
-    btn9=&GameClass::doNothing;
-    btn10=&GameClass::doNothing;
-    btn11=&GameClass::doNothing;
-    btn12=&GameClass::doNothing;
-    btn13=&GameClass::doNothing;
-    btn14=&GameClass::doNothing;
+/* easy access */
+/*void (GameClass::*btnPtr[])() = {*/
+void (GameClass::*btnPtr[])() = {
+        btn0,btn1,btn2,btn3,btn4,
+        btn5,btn6,btn7,btn8,btn9,
+        btn10,btn11,btn12,btn13,btn14
+        };
 
+/* TODO: this could probably just be replaced with a call to clearAllButtons(). */
+void GameClass::setupButtons(){
+    for(int i = 0; i < 15; i++)
+    {
+        btnPtr[i]=&GameClass::doNothing;
+        /*btnPtr[i]=&doNothing;*/
+
+        /*btn[i].setEnabled(false);*/
+    }
 }
 
+
+/* turns out implementing this is next to impossible due to the stupid class system.
+   (I can't get the function 'func' to exist in the GameClass namespace apparently)
+   Just set btnPtr[x] directly, I guess.*/
+
+/*void GameClass::addButton(int button, QString str, void *func  ){
+        btn[button].setText(str);
+        btnPtr[button]=func;
+}*/
+
+void GameClass::clearButton(int button){
+    btnPtr[button]=&GameClass::doNothing;
+    btn[button].setText("");
+    btn[button].setEnabled(false);
+}
+
+/* blank all buttons. */
+void GameClass::clearAllButtons(){
+    for(int i = 0; i < 15; i++)
+    {
+        btnPtr[i]=&GameClass::doNothing;
+        /*btnPtr[i]=&doNothing;*/
+        btn[i].setText("");
+        btn[i].setEnabled(false);
+    }
+}
 
 GameClass::GameClass()
 {
@@ -85,31 +128,16 @@ void GameClass::append(QString str)
     txtField->append(str);
 }
 
-/* button handling. This is horrific. */
+/* button handling. This is probably a little overcomplicated. */
 void GameClass::btnPress(int btnNum){
-    /* this is horrifying and could probably be done better with an array. */
-    switch(btnNum)
-    {
-    case 0:  (*this.*btn0)();  break;
-    case 1:  (*this.*btn1)();  break;
-    case 2:  (*this.*btn2)();  break;
-    case 3:  (*this.*btn3)();  break;
-    case 4:  (*this.*btn4)();  break;
-    case 5:  (*this.*btn5)();  break;
-    case 6:  (*this.*btn6)();  break;
-    case 7:  (*this.*btn7)();  break;
-    case 8:  (*this.*btn8)();  break;
-    case 9:  (*this.*btn9)();  break;
-    case 10: (*this.*btn10)(); break;
-    case 11: (*this.*btn11)(); break;
-    case 12: (*this.*btn12)(); break;
-    case 13: (*this.*btn13)(); break;
-    case 14: (*this.*btn14)(); break;
-    }
+    (*this.*btnPtr[btnNum])();
+    /*(*btnPtr[btnNum])();*/
 }
 
+/*void GameClass::doNothing(){*/
 void GameClass::doNothing(){
     /* and look good doing it. This function exists to prevent crashing when no button action is defined.*/
+    /* in the future I should disable the buttons instead. */
 }
 
 /* ---------------------- IMPLEMENTATION DETAILS END HERE ---------------------- */
@@ -128,7 +156,7 @@ void GameClass::newGame()
     btn[0].setText("Open mailbox");
 
     /* set function that button 0 should call. */
-    btn0=&GameClass::checkMail;
+    btnPtr[0]=&GameClass::checkMail;
 
 
 
@@ -152,7 +180,7 @@ void GameClass::checkMail(){
            "an envelope clipped to its left leg. It looks at you intently and tilts its head, clearly "
            "waiting for you to take its message.");
     btn[0].setText("Take letter");
-    btn0=&GameClass::takeLetter;
+    btnPtr[0]=&GameClass::takeLetter;
 }
 
 void GameClass::takeLetter(){
@@ -162,5 +190,6 @@ void GameClass::takeLetter(){
            "You see that the bird's note contains nothing save a URL:<br/>"
            "<a href=\"https://github.com/dragontamer8740/TestGameEngine1\">https://github.com/dragontamer8740/TestGameEngine1</a>");
     btn[0].setText("(end)");
-    btn0=&GameClass::doNothing;
+    btnPtr[0]=&GameClass::doNothing;
+    /*btnPtr[0]=&doNothing;*/
 }
