@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     /* notify gameClass where some pointers are. It needs to know.*/
 
+
     /* there has to be a nicer way to do game buttons. */
     QPushButton* btn[]={this->ui->btn0,this->ui->btn1,this->ui->btn2,
                         this->ui->btn3,this->ui->btn4,this->ui->btn5,
@@ -29,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
                         this->ui->btn12,this->ui->btn13,this->ui->btn14};
 
 
-    gameClass.setupGameUI(this->ui->textField,*btn);
+    gameClass.setupGameUI(this->ui->textField,*btn,this->ui);
 /*gameClass.setup*/
     /*this->ui->btn*/
 
@@ -70,7 +71,7 @@ void MainWindow::on_btnNewGame_clicked()
 
 /*static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked);*/
 /*QButtonGroup::buttonClicked(int)*/
-
+/*
 void MainWindow::on_btn0_clicked(){
     gameClass.btnPress(0);}
 
@@ -115,3 +116,7 @@ void MainWindow::on_btn13_clicked(){
 
 void MainWindow::on_btn14_clicked(){
     gameClass.btnPress(14);}
+
+
+
+*/

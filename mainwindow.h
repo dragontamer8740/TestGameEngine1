@@ -26,6 +26,7 @@ private slots:
     void on_btnSave_clicked();
 
     void on_btnNewGame_clicked();
+    /*
 
     void on_btn0_clicked();
 
@@ -56,7 +57,7 @@ private slots:
     void on_btn13_clicked();
 
     void on_btn14_clicked();
-
+*/
 private:
 
 };

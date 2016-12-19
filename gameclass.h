@@ -7,13 +7,16 @@
 
 
 
-class GameClass
+/*class GameClass */
+class GameClass : public QObject
 {
+    Q_OBJECT
+
 public:
     GameClass();
     /*void newGame(QTextBrowser *textField);*/
     void newGame();
-    void setupGameUI(QTextBrowser *textField,QPushButton buttons[]);
+    void setupGameUI(QTextBrowser *textField,QPushButton buttons[],Ui::MainWindow *ui);
     void setupButtons();
     /*void setupGameButtons(QButtonGroup *btnGroup);*/
     const std::string gameNameShort="textGame1";
@@ -22,34 +25,28 @@ public:
     void addButton(int button, QString str, void *func);
     void clearButton(int button);
     void clearAllButtons();
+    /* simplifies things a great deal from their older implementation */
+    QPushButton *btn(int btnNum);
 
-    /* hopefully this simplifies stuff */
-    /*void (GameClass::*btnPtr[15])();*/
-
-
-    void (GameClass::*btn0)()=NULL;
-    void (GameClass::*btn1)()=NULL;
-    void (GameClass::*btn2)()=NULL;
-    void (GameClass::*btn3)()=NULL;
-    void (GameClass::*btn4)()=NULL;
-    void (GameClass::*btn5)()=NULL;
-    void (GameClass::*btn6)()=NULL;
-    void (GameClass::*btn7)()=NULL;
-    void (GameClass::*btn8)()=NULL;
-    void (GameClass::*btn9)()=NULL;
-    void (GameClass::*btn10)()=NULL;
-    void (GameClass::*btn11)()=NULL;
-    void (GameClass::*btn12)()=NULL;
-    void (GameClass::*btn13)()=NULL;
-    void (GameClass::*btn14)()=NULL;
     void doNothing();
+
+public slots:
+    void selectRace(int race);
+    void checkMail();
+    void takeLetter();
+    void createChar();
+
+
+signals:
+    void buttonClicked();
 
 private:
     void disp(QString str);
     void append(QString str);
 
-    void checkMail();
-    void takeLetter();
+    /*void checkMail();*/
+
+
 };
 
 
