@@ -16,7 +16,7 @@ public:
     GameClass();
     /*void newGame(QTextBrowser *textField);*/
     void newGame();
-    void setupGameUI(QTextBrowser *textField,QPushButton buttons[],Ui::MainWindow *ui);
+    void setupGameUI(QTextBrowser *textField,Ui::MainWindow *ui);
     void setupButtons();
     /*void setupGameButtons(QButtonGroup *btnGroup);*/
     const std::string gameNameShort="textGame1";

@@ -45,7 +45,8 @@ QPushButton *GameClass::btn(int btnNum){
    case 14:
        return win->btn14; break;
    }
-
+   printf("WARNING!\nSomething has gone horribly wrong in btn().\nThe function has reached the end of the switch without finding a match,\nand as a result the function will return win->btn0. This SHOULD NEVER HAPPEN.\n");
+   return win->btn0; /* should never reach this point, but it shuts up compiler warnings. */
 }
 
 /* TODO: this could probably just be replaced with a call to clearAllButtons(). */
@@ -60,11 +61,6 @@ void GameClass::setupButtons(){
         /*btn[i].setEnabled(false);*/
     }
 }
-
-
-/* turns out implementing this is next to impossible due to the stupid class system.
-   (I can't get the function 'func' to exist in the GameClass namespace apparently)
-   Just set btnPtr[x] directly, I guess.*/
 
 /*void GameClass::addButton(int button, QString str, void *func  ){
         btn[button].setText(str);
@@ -83,8 +79,6 @@ void GameClass::clearAllButtons(){
     for(int i = 0; i < 15; i++)
     {
         QObject::disconnect(btn(i),SIGNAL(clicked()),0,0);
-        /*btnPtr[i]=&GameClass::doNothing;*/
-        /*btnPtr[i]=&doNothing;*/
         btn(i)->setText("");
         btn(i)->setEnabled(false);
     }
@@ -97,11 +91,9 @@ GameClass::GameClass()
 
 /* this is called when initializing the program. Without it we can't write to the text field easily.*/
 
-void GameClass::setupGameUI(QTextBrowser *textField,QPushButton buttons[],Ui::MainWindow *window){
+void GameClass::setupGameUI(QTextBrowser *textField,Ui::MainWindow *window){
     /* first let the game know where to write text to. The pointer is passed from the MainWindow.*/
     txtField=textField;
-    /*btn=buttons;*/
-    /* actually let's just pass the entire mainwindow in */
     win=window;
 
     GameClass::setupButtons();
@@ -225,7 +217,7 @@ void GameClass::createChar(){
 }
 
 void GameClass::selectRace(int race){
-    printf("you chose %d\n");
+    printf("you chose %d\n",race);
 }
 
 /*btnPtr[0]=&GameClass:createChar();*/
